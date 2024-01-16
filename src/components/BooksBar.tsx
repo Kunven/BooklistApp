@@ -23,7 +23,7 @@ function BooksBar(props: {setBookModal: React.Dispatch<React.SetStateAction<Book
   if (useBooksStore.getState().selectedBooks.length > 0) {
     return (
       <div className="max-w-5xl min-w-5xl">
-        <Card className="absolute top-5 right-0">
+        <Card className="absolute top-20 right-0">
           <CardHeader>
             <p>Lista de Lectura</p>
           </CardHeader>
