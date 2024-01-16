@@ -10,18 +10,32 @@ function Filters() {
         </CardHeader>
         <Divider/>
         <CardBody>
-          <Select 
-            label="Selecciona un genero" 
-            className="max-w-xs" 
-          >
-            {useBooksStore.getState().booksOriginal.map((book) =>{
-              return (
-                <SelectItem key={book.ISBN} value={book.genre}>
-                  {book.genre}
-                </SelectItem>
-              )
-            })}
-          </Select>
+          <div className="grid grid-cols-3 grid-rows-2 gap-4">
+            <Select 
+              label="Selecciona un genero" 
+              className="max-w-xs mr-2" 
+            >
+              {useBooksStore.getState().genreFilters.map((genre) =>{
+                return (
+                  <SelectItem key={genre} value={genre}>
+                    {genre}
+                  </SelectItem>
+                )
+              })}
+            </Select>
+            <Select 
+              label="Selecciona un autor" 
+              className="max-w-xs" 
+            >
+              {useBooksStore.getState().authorFilters.map((genre) =>{
+                return (
+                  <SelectItem key={genre} value={genre}>
+                    {genre}
+                  </SelectItem>
+                )
+              })}
+            </Select>
+          </div>          
         </CardBody>
       </Card>
     </div>

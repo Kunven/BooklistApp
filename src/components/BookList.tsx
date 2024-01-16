@@ -8,7 +8,7 @@ import BooksBar from './BooksBar';
 import Filters from '../components/Filters'
 import type { Book } from '../api/Books';
 function BookList() {
-  const {updateBooks,updateSelected,createBooks} = useBooksStore()
+  const {updateBooks,updateSelected,createBooks,setGenreFilters,setAuthorFilters} = useBooksStore()
   const {status,error,data:Books} = useQuery({queryKey:["book"],queryFn: getBooks})
   useEffect(() =>{
     //Storing the books in the global store
@@ -17,10 +17,19 @@ function BookList() {
       //Creates a backup for updating the list
       createBooks(Books)
       //Creating the genre filter object
-
+      const genresDup = Books.map((book) =>{
+        return (book.genre)
+      })
+      const genres = new Set(genresDup)
+      setGenreFilters(Array.from(genres))
       //Creating the author filter object
+      const authorsDup = Books.map((book) =>{
+        return (book.author.name)
+      })
+      const authors = new Set(authorsDup)
+      setAuthorFilters(Array.from(authors))
     }  
-  },[Books,updateBooks,createBooks])
+  },[Books,updateBooks,createBooks,setGenreFilters,setAuthorFilters])
   if (status === "loading") {
     return (
       <Card>
@@ -52,6 +61,7 @@ function BookList() {
   }
   return (
     <>    
+      {/* Filters */}
       <Filters />
       {/* Books */}
       <div className='grid grid-cols-3 gap-4 mt-5 content-center max-w-5xl mx-auto px-8 justify-center h-full '>
